@@ -1,6 +1,6 @@
 # AI 엔지니어 전환 프로젝트 — 리뷰 모드
 
-이 폴더는 **AI 엔지니어 커리어 전환**을 위한 포트폴리오 프로젝트다. 결과물은 "백업일지 에이전트" 하나를 끝까지 배포하는 것.
+이 폴더는 **AI 엔지니어 커리어 전환**을 위한 포트폴리오 프로젝트다. 결과물은 **서울 부동산 실거래가 인사이트 서비스**(공공데이터 → pandas/scikit-learn 예측 → Claude가 인사이트 설명, 채팅·MCP·자동 리포트) 하나를 끝까지 배포하는 것.
 학습자는 프론트엔드(React, zod, React Query) 경험이 있고, Python/백엔드는 1주차 수준.
 전체 계획은 `ROADMAP.md`. 환경: macOS, zsh, VS Code, `.venv`.
 
@@ -17,7 +17,8 @@
 8. 짧은 반말. 공식 코스는 해당 주차에 링크로 안내.
 
 ## 기술 스택 (확정)
-- Python / FastAPI / SQLModel / SQLite(→ 필요 시 Postgres)
+- Python / FastAPI / SQLModel / SQLite(→ 필요 시 Postgres) / httpx
+- pandas, scikit-learn (딥러닝 없음)
 - Claude SDK 직접 호출 (LangGraph는 9~10주에 한 번 포팅)
 - React(Vite) 채팅 UI, SSE 스트리밍
 - FastMCP, sqlite-vec 또는 pgvector, Docker
@@ -25,5 +26,6 @@
 ## 현재 진도
 - 2026-11-01: 1주차(구 로드맵) 완료. GET/POST, pydantic, 404/422.
 - 2026-11-02: sqlite3 기본 (CREATE/INSERT/SELECT, fetchone/None, commit). GET /pcs를 DB 조회로 교체.
-- 2026-11-03: 로드맵 개정(ROADMAP.md). git init + GitHub 공개 레포(Namgyeon/backup-log-agent). 주제 확정: 학습자 실제 업무(원격 PC 용량·캡쳐 수집 → PPT 결재) 자동화. 코딩은 안 함.
-- 다음 할 일: **먼저 학습자에게 PC별 실제 기록 항목 묻기** → SQLModel 설치 → `models.py`(Pc 테이블) → CRUD 4개 → `.env` → router 분리. 학습 세션은 밤 11:30 전에 끝낸다.
+- 2026-11-03: 로드맵 개정(ROADMAP.md). git init + GitHub 공개 레포.
+- 2026-11-09: 주제 변경 → **서울 부동산 실거래가 인사이트** (레포명 seoul-apt-insight). 기존 pcs 코드는 1주차에 Trade 테이블로 교체 예정. 코딩은 안 함.
+- 다음 할 일: 학습자 숙제 = 공공데이터포털 가입 + "아파트 매매 실거래가 상세 자료" API 활용신청해서 인증키 받기(`.env`에 넣음). 그다음 Claude가 `fetch_trades.py`(httpx) + `models.py`(Trade) + 적재 스크립트 작성. 학습 세션은 밤 11:30 전에 끝낸다.
