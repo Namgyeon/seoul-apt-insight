@@ -28,4 +28,5 @@
 - 2026-11-02: sqlite3 기본 (CREATE/INSERT/SELECT, fetchone/None, commit). GET /pcs를 DB 조회로 교체.
 - 2026-11-03: 로드맵 개정(ROADMAP.md). git init + GitHub 공개 레포.
 - 2026-11-09: 주제 변경 → **서울 부동산 실거래가 인사이트** (레포명 seoul-apt-insight). 기존 pcs 코드는 1주차에 Trade 테이블로 교체 예정. 코딩은 안 함.
-- 다음 할 일: 학습자 숙제 = 공공데이터포털 가입 + "아파트 매매 실거래가 상세 자료" API 활용신청해서 인증키 받기(`.env`에 넣음). 그다음 Claude가 `fetch_trades.py`(httpx) + `models.py`(Trade) + 적재 스크립트 작성. 학습 세션은 밤 11:30 전에 끝낸다.
+- 2026-11-11: 공공데이터포털 인증키 발급 완료, API 호출 성공 확인(마포구 202510, 441건). 응답은 XML, dealAmount는 "260,000" 문자열, 거래일은 dealYear/Month/Day 분리.
+- 다음 할 일: `fetch_trades.py`(httpx로 월별 페이지 순회, XML 파싱) + `models.py`(Trade: apt_seq, apt_name, dong, price, area, floor, build_year, deal_date) + 마포구 1년치 적재 스크립트. Claude가 통째로 작성, 학습자는 리뷰. 세션은 밤 11:30 전 종료.
