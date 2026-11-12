@@ -32,7 +32,14 @@ def fetch_month(lawd_cd: str, deal_ymd: str) -> list[dict]:
             return []
         raise RuntimeError(f"API 오류: {root.findtext('header/resultMsg')}")
 
-    return [parse_item(item) for item in root.iter("item")]
+    trades = [parse_item(item) for item in root.iter("item")]
+
+    # 한 페이지(1000건)에 다 안 담긴 경우: 조용히 잘리지 않게 바로 알린다
+    total = int(root.findtext("body/totalCount") or 0)
+    if total > len(trades):
+        raise RuntimeError(f"{lawd_cd} {deal_ymd}: 전체 {total}건 중 {len(trades)}건만 받음. 페이지 순회 필요")
+
+    return trades
 
 
 def parse_item(item: ET.Element) -> dict:
@@ -40,6 +47,7 @@ def parse_item(item: ET.Element) -> dict:
     text = lambda tag: (item.findtext(tag) or "").strip()
 
     return {
+        "lawd_cd": text("sggCd"),  # 구 코드. 여러 구를 한 테이블에 넣을 때 구분용
         "apt_seq": text("aptSeq"),
         "apt_name": text("aptNm"),
         "dong": text("umdNm"),

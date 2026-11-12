@@ -60,3 +60,17 @@
 | `httpx.get(url, params=p)` | `fetch(url + '?' + new URLSearchParams(p))` | 쿼리 인코딩 자동 |
 | `resp.raise_for_status()` | `if (!res.ok) throw ...` | 4xx/5xx면 에러 |
 | pydantic `BaseModel` | zod schema | 타입 검증 |
+
+## 2026-11-12 추가 (models.py, load_trades.py)
+| Python | JS | 메모 |
+|---|---|---|
+| `class Trade(SQLModel, table=True):` | `class Trade extends SQLModel` | 괄호 안이 부모 클래스. `table=True`면 DB 테이블도 됨 |
+| `price: int` (클래스 안) | TS `price: number` | 필드 선언. SQLModel이 이걸 보고 컬럼을 만듦 |
+| `int \| None = None` | `number \| null = null` | 없어도 되는 값 |
+| `y, m = 2025, 10` | `const [y, m] = [2025, 10]` | 구조 분해 |
+| `a if 조건 else b` | `조건 ? a : b` | 삼항 연산자. 순서가 다름 |
+| `f"{m:02d}"` | `String(m).padStart(2, "0")` | 2자리 0 채우기. 3 → "03" |
+| `while 조건:` | `while (조건) { }` | |
+| `Trade(**t)` | `new Trade({ ...t })` | dict를 펼쳐서 인자로 넘김 |
+| `with Session(engine) as s:` | `try { ... } finally { s.close() }` | 블록 끝나면 자동으로 닫아줌 |
+| `sys.argv[1]` | `process.argv[2]` | 명령줄 인자. Python은 1부터 |

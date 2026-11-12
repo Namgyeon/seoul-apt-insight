@@ -35,3 +35,9 @@
 - **httpx = axios 같은 라이브러리**, `resp`는 요청이 아니라 응답. `numOfRows`는 "페이지당 최대"지 "N건 가져와"가 아님.
 - **API 붙일 땐 문서 + 실제 호출 둘 다 본다.** 기술문서(docs/)에서 000은 응답 샘플에만 있고, 에러 표에 `03 No Data`가 있음 → 거래 0건인 달은 에러로 죽는 버그 발견.
 - 다음 할 일: (직접 수정) `fetch_month`에서 resultCode `03`이면 `return []`. 그다음 Trade 모델 + DB 적재.
+
+## 2026-11-12 (2차) — SQLModel 모델 + DB 적재
+- **SQLModel = zod 스키마가 곧 DB 테이블.** 클래스에 `price: int` 쓰면 컬럼이 됨. `CREATE TABLE`을 대신 만들어줌. 컬럼 뜻은 docs/COLUMNS.md.
+- **트랜잭션**: "지우기 + 넣기"를 commit 한 번으로 묶음. commit 없이 끝나면 전부 취소되고 DB는 그대로. 화면에 찍힌 건수는 API에서 받은 개수일 뿐.
+- **멱등성(같은 걸 여러 번 돌려도 결과가 같음)**: 그 구·그 달을 먼저 지우고 넣어서 재실행해도 중복 없음. delete 빠지면 건수가 2배.
+- 다음 할 일: main.py의 pcs 코드를 걷어내고 `GET /trades`(구·기간 필터) API 만들기.
