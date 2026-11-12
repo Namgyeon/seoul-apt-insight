@@ -29,4 +29,5 @@
 - 2026-11-03: 로드맵 개정(ROADMAP.md). git init + GitHub 공개 레포.
 - 2026-11-09: 주제 변경 → **서울 부동산 실거래가 인사이트** (레포명 seoul-apt-insight). 기존 pcs 코드는 1주차에 Trade 테이블로 교체 예정. 코딩은 안 함.
 - 2026-11-11: 공공데이터포털 인증키 발급 완료, API 호출 성공 확인(마포구 202510, 441건). 응답은 XML, dealAmount는 "260,000" 문자열, 거래일은 dealYear/Month/Day 분리.
-- 다음 할 일: `fetch_trades.py`(httpx로 월별 페이지 순회, XML 파싱) + `models.py`(Trade: apt_seq, apt_name, dong, price, area, floor, build_year, deal_date) + 마포구 1년치 적재 스크립트. Claude가 통째로 작성, 학습자는 리뷰. 세션은 밤 11:30 전 종료.
+- 2026-11-12: `fetch_trades.py` 작성(httpx + XML 파싱, 마포구 202510 441건 성공). PYTHON_CHEATSHEET.md 생성(JS 비교 문법표, 새 문법 나오면 계속 추가). 기술문서는 docs/에.
+- 다음 할 일: 학습자가 직접 `03 No Data`면 `return []` 추가 → 확인 질문 답 → 커밋. 그다음 `models.py`(Trade) + 마포구 1년치 적재. 학습자는 문법을 모름: 새 코드마다 처음 나온 문법을 치트시트에 추가하고 JS 비교로 짧게 설명할 것.
